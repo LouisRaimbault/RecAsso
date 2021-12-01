@@ -524,7 +524,7 @@ void erase_tree (pnodesr *& Tree)
 
 // [[Rcpp::export]]
 Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & nameliste ,std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice )
-{ Rcpp::Function readline = base["readline"];
+{ 
   if (coeffs[0]!= "Conf2" || valcoef.size()==0) 
     { Rcpp::Rcout << "Please set Conf2 as first coefficient and set in valcoef its treashold \n ";
       std::vector<int> outnul(1);  
