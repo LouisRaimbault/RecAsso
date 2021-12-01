@@ -1,5 +1,5 @@
-\name{transactiontoBitmax}
-\alias{transactiontoBitmax}
+\name{From_transaction_to_binary}
+\alias{From_transaction_to_binary}
 \title{Creation of a Binary DataFRame from transactions type}
 \usage{
 transactiontoBitmax(transac , deli)
@@ -18,6 +18,6 @@ Returns the corresponding Binary R DataFrame. If you imported your transaction a
 \examples{
 
 data("Transacfruits")
-binaryfruits = transactiontoBitmax (as.matrix(Transacfruits),",")
+binaryfruits = From_transaction_to_binary (as.matrix(Transacfruits),",")
 ## Import transaction data Transacfruits and create the correspondant binary matrix.
 }

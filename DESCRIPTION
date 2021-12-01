@@ -1,4 +1,4 @@
-Package: RecAssoRules
+Package: RecAsso
 Type: Package
 Title: Recursive Mining for Frequent Pattern and Confident Association Rules
 Version: 1.0
@@ -11,7 +11,7 @@ Description: Provides functions allowing the user to recursively extract frequen
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
-URL: https://github.com/LouisRaimbault/RecAssoRules-R
-BugReports: https://github.com/LouisRaimbault/RecAssoRules-R
+URL: https://github.com/LouisRaimbault/Rules_Rec
+BugReports: https://github.com/LouisRaimbault/Rules_Rec
 NeedsCompilation: yes
 RoxygenNote: 7.1.1

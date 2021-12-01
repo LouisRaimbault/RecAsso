@@ -1,5 +1,5 @@
-\name{PrefRules}
-\alias{PrefRules}
+\name{prefrecrules}
+\alias{prefrecrules}
 \title{Mining for frequent patterns and confident rules.}
 \usage{
 prefrecrules (Bitmax  , varnames , relativeSup , Minconf )
