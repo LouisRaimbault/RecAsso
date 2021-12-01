@@ -524,7 +524,7 @@ void erase_tree (pnodesr *& Tree)
 
 
 // [[Rcpp::export]]
-Rcpp::DataFrame prefrulestrat (Rcpp::List indic ,std::vector<std::string> & nameliste ,std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice )
+Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & nameliste ,std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice )
 { Rcpp::Function readline = base["readline"];
   if (coeffs[0]!= "Conf2" || valcoef.size()==0) 
     { Rcpp::Rcout << "Please set Conf2 as first coefficient and set in valcoef its treashold \n ";
@@ -535,7 +535,7 @@ Rcpp::DataFrame prefrulestrat (Rcpp::List indic ,std::vector<std::string> & name
        
   
   double minConf = valcoef[0];
-  Rcpp::Rcout << "La valeur de Minconf est " << minConf << "\n";
+  Rcpp::Rcout << "The minconf value is " << minConf << "\n";
   bool ok_size = ok_choice[0];
   bool ok_sup = ok_choice[1];
   bool ok_global_indic = ok_choice[2];

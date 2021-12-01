@@ -4,27 +4,6 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-NumericVector set_rank (NumericVector x) 
-{ int a = 0;
-  std::sort(x.begin(),x.end());
-  std::reverse(x.begin(), x.end());
-  NumericVector out (x.size());
-  int rank = 1;
-  double curval = x[0] ;
-  int e = 0;
-  for (a = 0; a < x.size();a++)
-  {
-    if (x[a] < curval ) {rank++; out[e++]= rank; curval = x[a]; }
-    else {out[e++] = rank;}
-  }
-  
-  return out;
-}
-
-
-
-
-// [[Rcpp::export]]
 Rcpp::DataFrame From_binary_to_transactions (std::vector<std::vector<short>> Tab, std::vector<std::string> name, char sep)
 { int nb_var = Tab.size();
   int nb_ind = Tab[0].size();
@@ -133,7 +112,7 @@ void set_tgt_vec_unique (std::vector<std::string> &tgt_vec_unique, std::string t
 }
 
 // [[Rcpp::export]]
-Rcpp::DataFrame is_antecedant_or_consequent ( std::vector<std::string> set_to_check, std::string target, std::string ante_or_cons )
+Rcpp::DataFrame is_in_set ( std::vector<std::string> set_to_check, std::string target, std::string ante_or_cons )
 {
   int nb_elem = set_to_check.size();
   std::string type_tg = ante_or_cons ;
