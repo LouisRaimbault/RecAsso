@@ -4,7 +4,6 @@ using namespace Rcpp;
 #include <fstream>
 #include <math.h>
 
-Environment base = Environment("package:base");
 
 struct pnodesr
 {
