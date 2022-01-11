@@ -36,8 +36,8 @@ If you would like to better understand their use and methods of operation, pleas
 * Maxwell-Pilliner 
 
 **Prefrules global indicators :**
-* Mean
-* Strong
+* General-M
+* General-MW
 
 **Other usefull functio**
 * From_transaction_to_binary : Create the Binary Matrix as R dataframe from the transaction data.

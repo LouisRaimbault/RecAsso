@@ -125,7 +125,7 @@ Rcpp::DataFrame is_in_set ( std::vector<std::string> set_to_check, std::string t
   NumericVector out (nb_elem);
   for (int i = 0; i < nb_elem;i++)
   {out[i] = check_target(set_to_check[i],unique_item_in_target,size_tg);}
-  std::string name_out = target +"_is_";
+  std::string name_out = target +"_in_";
   name_out += type_tg;
   DataFrame bool_target = Rcpp::DataFrame::create(Rcpp::Named(name_out)=out);
   return bool_target;

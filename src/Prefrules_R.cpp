@@ -1,7 +1,5 @@
 #include <Rcpp.h>
 using namespace Rcpp;
-#include <iostream>
-#include <fstream>
 #include <math.h>
 
 
@@ -208,7 +206,7 @@ void set_fction_select (fction_selec * tab_fcs, fction_selec * tab_fcs_choice ,s
 void set_target_indices ( bool * ind_target, std::vector<int> & litem_glob , std::vector<int> & size_glob, std::vector<int> & litem_target, int & nb_it)
 { 
   int i,j,k;
-  Rcpp::Rcout << "nb_it = " << nb_it << "\n";
+  
   for(i = 0; i < nb_it;i++){ind_target[i]=0;}
   nb_it = 0;
   int v = 1;
@@ -250,10 +248,10 @@ void set_target_labels (std::vector<std::string> & nameliste, std::vector<std::s
   
   for (r = 0; r < nb_target;r++)
   { std::string tgt = targets[r];
-    Rcpp::Rcout << "target est " << tgt << "\n";
+    
     for ( t = 0;t < name_sl;t++ )
     {
-      if (nameliste[t] == tgt )  {label_targets.push_back(t); Rcpp::Rcout << "le label est "<< t << "\n"; break;}
+      if (nameliste[t] == tgt )  {label_targets.push_back(t); break;}
     }
   }
 }
@@ -278,9 +276,9 @@ int check_rules (fction_selec * tab_fction, int nb_fction, std::list<rules> & ru
    { valid = 1;
      
      freq_ante = map_sup[itb->ante]; freq_cons = map_sup[itb->cons]; freq_set = map_sup[itb->set];
-     //Rcpp::Rcout << freq_ante << " " << freq_cons << " " << freq_set << "\n";
+     
       for (i = 0; i < nb_fction;i++)
-      { //Rcpp::Rcout << conftwo(freq_ante,freq_cons,freq_set) << "\n";   
+      { 
           if (tab_fction[i].pfunction(freq_ante,freq_cons,freq_set)<tab_fction[i].treshold){valid = 0; break;}
         }
       if (valid) {itb->valid=1; nb_valid++;}
@@ -378,7 +376,7 @@ void allrules  (std::string & stree, std::string& cntree , std::string * tabcons
   {  
     trstree.erase(trstree.find(tabconseqalpha[good]),tabconseqalpha[good].size());
     double indic = conftwo(map_double[trstree],map_double[cnstree],cursup);
-    if (indic > Minconf)
+    if (indic >= Minconf)
     { 
       cnstree +=  tabconseqalpha[good];
       ruliste.emplace_front (rules(indic,trstree,cnstree,strset));
@@ -397,7 +395,7 @@ void allrules  (std::string & stree, std::string& cntree , std::string * tabcons
       
       trstree.erase(trstree.find(tabconseqalpha[i]),tabconseqalpha[i].size());
       double indic = conftwo(map_double[trstree],map_double[cnstree],cursup);
-      if (indic > Minconf)
+      if (indic >= Minconf)
       { 
         cnstree +=  tabconseqalpha[i];
         antecedant[ngr] = trstree;
@@ -447,7 +445,7 @@ void genrules (pnodesr & tree ,int size ,std::string ** tabname,std::string & st
   for (int i = 2; i < size;i++)
   { tmpstr += *(tabname[i]);}
   double indic = conftwo(map_double[tmpstr],map_double[*tabname[0]],cursup);
-  if (indic > Minconf ) {
+  if (indic >= Minconf ) {
     ruliste.emplace_front(rules(indic,tmpstr,*tabname[0],strtemp));
     antecedant[nrg] = tmpstr;
     consalpha[nrg] = *tabname[0];
@@ -465,7 +463,7 @@ void genrules (pnodesr & tree ,int size ,std::string ** tabname,std::string & st
       if (l != j) tmpstr += *(tabname[l]);     
     }
     double indic = conftwo(map_double[tmpstr], map_double[*tabname[j]],cursup);
-    if (indic > Minconf)  
+    if (indic >= Minconf)  
     {
       ruliste.emplace_front(rules(indic,tmpstr,*tabname[j],strtemp));
       antecedant[nrg] = tmpstr;
@@ -522,9 +520,10 @@ void erase_tree (pnodesr *& Tree)
 
 
 
+
 // [[Rcpp::export]]
-Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & nameliste ,std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice )
-{ 
+Rcpp::DataFrame prefrulestrat (Rcpp::List indic ,std::vector<std::string> & nameliste ,std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice )
+{ Rcpp::Function readline = base["readline"];
   if (coeffs[0]!= "Conf2" || valcoef.size()==0) 
     { Rcpp::Rcout << "Please set Conf2 as first coefficient and set in valcoef its treashold \n ";
       std::vector<int> outnul(1);  
@@ -534,7 +533,7 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
        
   
   double minConf = valcoef[0];
-  Rcpp::Rcout << "The minconf value is " << minConf << "\n";
+  Rcpp::Rcout << "La valeur de Minconf est " << minConf << "\n";
   bool ok_size = ok_choice[0];
   bool ok_sup = ok_choice[1];
   bool ok_global_indic = ok_choice[2];
@@ -554,7 +553,7 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
   int nb_freq = supvalue.size();
   bool * ind_target = new bool [nb_freq];
   for (r = 0; r < nb_freq;r++) {ind_target[r] = 1;}
-  Rcpp::Rcout << "nb_freq = " << nb_freq << "\n";
+
   int nb_target_frequent = nb_freq;
   pnodesr ** tabpnodes = new pnodesr* [nb_freq];
   pnodesr * rootrules =  new pnodesr(0,0,0,0);
@@ -602,6 +601,7 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
   Genrules_root (*rootrules->son,1,tabname,st,&nameliste[0],map_sup, minConf ,ruleliste);
   erase_tree(rootrules);
   
+  Rcpp::Rcout << "taille de ruleiste " << ruleliste.size() << "\n";
 
   int n_rules = check_rules(tab_choice_coeff,nb_coeff,ruleliste,map_sup);
   Rcpp::Rcout << "n_rules = " << n_rules << "\n"; 
@@ -624,7 +624,7 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
   { std::string sttest = it->first;
     nb_frequent_target += check_target(sttest,targets);
   }
-  // Rcpp::Rcout << "IL y a " << nb_frequent_target << " frequents avec la cible \n";
+  Rcpp::Rcout << "IL y a " << nb_frequent_target << " frequents avec la cible \n";
   if (ok_global_indic)
     { std::list<rules>::iterator it = ruleliste.begin();
       double * pt_meanc = &Mat_coeff[Mat_coeff.size()-2][0];
@@ -638,9 +638,7 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
     }
   
   std::vector<std::string> names_dataframe {"Antecedant","Consequent","set"};
-
   
-  /*
   std::vector<int> target_antecedant;
   std::vector<int> target_consequent;
   
@@ -659,7 +657,7 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
       }
     
   }
-  */
+  
   
   
   
@@ -691,21 +689,20 @@ Rcpp::DataFrame PrefRules (Rcpp::List indic ,std::vector<std::string> & namelist
   
   if (ok_global_indic)
   {
-    names_dataframe.push_back("meanc");
-    names_dataframe.push_back("strong");
+    names_dataframe.push_back("General_M");
+    names_dataframe.push_back("General_MW");
     prep_out.push_back(Mat_coeff[Mat_coeff.size()-2]);
     prep_out.push_back(Mat_coeff[Mat_coeff.size()-1]);
   }
   
-  /*if (ok_targets)
+  if (ok_targets)
   {
     names_dataframe.push_back("target_A");
-    names_dataframe.push_back("target_B");
+    names_dataframe.push_back("target_C");
     prep_out.push_back(target_antecedant);
     prep_out.push_back(target_consequent);
     
-  }*/
-
+  }
   Rcpp::DataFrame out_data (prep_out);
   out_data.attr("names")=names_dataframe;
   
