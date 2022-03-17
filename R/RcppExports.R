@@ -2,22 +2,22 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 Prefrec <- function(Data, relativeSup, deli, ordre) {
-    .Call(`_Rec_Asso_Prefrec`, Data, relativeSup, deli, ordre)
+    .Call(`_RecAsso_Prefrec`, Data, relativeSup, deli, ordre)
 }
 
-PrefRules <- function(indic, nameliste, coeffs, valcoef, coeff_extract, targets, ok_choice) {
-    .Call(`_Rec_Asso_PrefRules`, indic, nameliste, coeffs, valcoef, coeff_extract, targets, ok_choice)
+prefrulestrat <- function(indic, nameliste, coeffs, valcoef, coeff_extract, targets, ok_choice) {
+    .Call(`_RecAsso_prefrulestrat`, indic, nameliste, coeffs, valcoef, coeff_extract, targets, ok_choice)
 }
 
 From_binary_to_transactions <- function(Tab, name, sep) {
-    .Call(`_Rec_Asso_From_binary_to_transactions`, Tab, name, sep)
+    .Call(`_RecAsso_From_binary_to_transactions`, Tab, name, sep)
 }
 
 From_transaction_to_binary <- function(transac, deli) {
-    .Call(`_Rec_Asso_From_transaction_to_binary`, transac, deli)
+    .Call(`_RecAsso_From_transaction_to_binary`, transac, deli)
 }
 
 is_in_set <- function(set_to_check, target, ante_or_cons) {
-    .Call(`_Rec_Asso_is_in_set`, set_to_check, target, ante_or_cons)
+    .Call(`_RecAsso_is_in_set`, set_to_check, target, ante_or_cons)
 }
 

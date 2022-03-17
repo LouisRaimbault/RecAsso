@@ -5,9 +5,14 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // Prefrec
 Rcpp::List Prefrec(std::vector<std::string> Data, double relativeSup, char deli, char ordre);
-RcppExport SEXP _Rec_Asso_Prefrec(SEXP DataSEXP, SEXP relativeSupSEXP, SEXP deliSEXP, SEXP ordreSEXP) {
+RcppExport SEXP _RecAsso_Prefrec(SEXP DataSEXP, SEXP relativeSupSEXP, SEXP deliSEXP, SEXP ordreSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,9 +24,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// PrefRules
-Rcpp::DataFrame PrefRules(Rcpp::List indic, std::vector<std::string>& nameliste, std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice);
-RcppExport SEXP _Rec_Asso_PrefRules(SEXP indicSEXP, SEXP namelisteSEXP, SEXP coeffsSEXP, SEXP valcoefSEXP, SEXP coeff_extractSEXP, SEXP targetsSEXP, SEXP ok_choiceSEXP) {
+// prefrulestrat
+Rcpp::DataFrame prefrulestrat(Rcpp::List indic, std::vector<std::string>& nameliste, std::vector<std::string> coeffs, std::vector<double> valcoef, std::vector<std::string> coeff_extract, std::vector<std::string> targets, std::vector<int> ok_choice);
+RcppExport SEXP _RecAsso_prefrulestrat(SEXP indicSEXP, SEXP namelisteSEXP, SEXP coeffsSEXP, SEXP valcoefSEXP, SEXP coeff_extractSEXP, SEXP targetsSEXP, SEXP ok_choiceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,13 +37,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::vector<std::string> >::type coeff_extract(coeff_extractSEXP);
     Rcpp::traits::input_parameter< std::vector<std::string> >::type targets(targetsSEXP);
     Rcpp::traits::input_parameter< std::vector<int> >::type ok_choice(ok_choiceSEXP);
-    rcpp_result_gen = Rcpp::wrap(PrefRules(indic, nameliste, coeffs, valcoef, coeff_extract, targets, ok_choice));
+    rcpp_result_gen = Rcpp::wrap(prefrulestrat(indic, nameliste, coeffs, valcoef, coeff_extract, targets, ok_choice));
     return rcpp_result_gen;
 END_RCPP
 }
 // From_binary_to_transactions
 Rcpp::DataFrame From_binary_to_transactions(std::vector<std::vector<short>> Tab, std::vector<std::string> name, char sep);
-RcppExport SEXP _Rec_Asso_From_binary_to_transactions(SEXP TabSEXP, SEXP nameSEXP, SEXP sepSEXP) {
+RcppExport SEXP _RecAsso_From_binary_to_transactions(SEXP TabSEXP, SEXP nameSEXP, SEXP sepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -51,7 +56,7 @@ END_RCPP
 }
 // From_transaction_to_binary
 Rcpp::DataFrame From_transaction_to_binary(std::vector<std::string> transac, char deli);
-RcppExport SEXP _Rec_Asso_From_transaction_to_binary(SEXP transacSEXP, SEXP deliSEXP) {
+RcppExport SEXP _RecAsso_From_transaction_to_binary(SEXP transacSEXP, SEXP deliSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -63,7 +68,7 @@ END_RCPP
 }
 // is_in_set
 Rcpp::DataFrame is_in_set(std::vector<std::string> set_to_check, std::string target, std::string ante_or_cons);
-RcppExport SEXP _Rec_Asso_is_in_set(SEXP set_to_checkSEXP, SEXP targetSEXP, SEXP ante_or_consSEXP) {
+RcppExport SEXP _RecAsso_is_in_set(SEXP set_to_checkSEXP, SEXP targetSEXP, SEXP ante_or_consSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,15 +81,15 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_Rec_Asso_Prefrec", (DL_FUNC) &_Rec_Asso_Prefrec, 4},
-    {"_Rec_Asso_PrefRules", (DL_FUNC) &_Rec_Asso_PrefRules, 7},
-    {"_Rec_Asso_From_binary_to_transactions", (DL_FUNC) &_Rec_Asso_From_binary_to_transactions, 3},
-    {"_Rec_Asso_From_transaction_to_binary", (DL_FUNC) &_Rec_Asso_From_transaction_to_binary, 2},
-    {"_Rec_Asso_is_in_set", (DL_FUNC) &_Rec_Asso_is_in_set, 3},
+    {"_RecAsso_Prefrec", (DL_FUNC) &_RecAsso_Prefrec, 4},
+    {"_RecAsso_prefrulestrat", (DL_FUNC) &_RecAsso_prefrulestrat, 7},
+    {"_RecAsso_From_binary_to_transactions", (DL_FUNC) &_RecAsso_From_binary_to_transactions, 3},
+    {"_RecAsso_From_transaction_to_binary", (DL_FUNC) &_RecAsso_From_transaction_to_binary, 2},
+    {"_RecAsso_is_in_set", (DL_FUNC) &_RecAsso_is_in_set, 3},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_Rec_Asso(DllInfo *dll) {
+RcppExport void R_init_RecAsso(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
