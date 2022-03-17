@@ -4,7 +4,7 @@
 
 
 
-On this git, we present the "RecAsso" package mainly allowing the use of the **PrefRec** and **Prefrules** functions using R. As well as other useful functions simplifying the extraction of frequent sets or the analysis of the extracted rules. 
+On this git, we present the "RecAsso" package mainly allowing the use of the **PrefRec** and **prefrulestrat** functions using R. As well as other useful functions simplifying the extraction of frequent sets or the analysis of the extracted rules. 
 The package uses **RCPP** and therefore its dependency is necessary. The library **devtool** is also need to install the package from Github.
 These 2 algorithms were built around the notion of *Mining Frequent ItemSets and associations rules*. This data analysis method was first introduced by *Agrawal et al. 1993* for mining transaction databases.
 
