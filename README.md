@@ -50,7 +50,7 @@ library(devtools)
 install_github("LouisRaimbault/RecAsso")
 
 Prefrec (<data as transaction format>, <relative minsup>, <delimitator of item in a transaction>, <order of the frequent 1-item before extraction>)
-Prefrules (<freqindic from the prefrec extraction>, <items from the prefrec extraction>, <list of coefficients used to validate the rules>, <values of the coefficient used to validate the rules>,<wished coefficient exported as dataframe>, <potentiel target item or itemset>, <choice for supplementary indicators exported> )
+prefrulestrat (<freqindic from the prefrec extraction>, <items from the prefrec extraction>, <list of coefficients used to validate the rules>, <values of the coefficient used to validate the rules>,<wished coefficient exported as dataframe>, <potentiel target item or itemset>, <choice for supplementary indicators exported> )
 From_transaction_to_binary (<data as transaction format>, "delimitator of item in a transaction")
 From_binary_to_transactions (<data as binary Dataframe>, <colnames of your data>, <the delimitator to set for the transaction fortmat>)
 is_in_set (<one String column of your data (antecedant,consequent_set)>, <item or itemset target>, <categorie of your string column>)
