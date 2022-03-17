@@ -4,11 +4,11 @@
 
 
 
-On this git, we present the "RecAsso_Rul" package mainly allowing the use of the **PrefRec** and **Prefrules** functions using R. As well as other useful functions simplifying the extraction of frequent sets or the analysis of the extracted rules. 
+On this git, we present the "RecAsso" package mainly allowing the use of the **PrefRec** and **Prefrules** functions using R. As well as other useful functions simplifying the extraction of frequent sets or the analysis of the extracted rules. 
 The package uses **RCPP** and therefore its dependency is necessary. The library **devtool** is also need to install the package from Github.
 These 2 algorithms were built around the notion of *Mining Frequent ItemSets and associations rules*. This data analysis method was first introduced by *Agrawal et al. 1993* for mining transaction databases.
 
-**Prefrec** and **Prefrules** use functions that allow recursive application by variable as well as an update method (new items can be added as long as the individuals remain the same). However, the current version (1.1) performs the usual applications of this type of Data Mining. Because it is complicated to predict the various wishes of users.
+**Prefrec** and **prefrulestrat** use functions that allow recursive application by variable as well as an update method (new items can be added as long as the individuals remain the same). However, the current version (1.1) performs the usual applications of this type of Data Mining. Because it is complicated to predict the various wishes of users.
 Please, Let us know if you want to get a specialized version for your use case, and quote my work if you want to reuse this code for your personal needs.
 
 More versions will arrive soon for more precise and diverse applications.
@@ -90,7 +90,7 @@ The folder sample contain a simple small dataset test. You can use it for the ex
 
 
 
-## Parameters for Prefrules :
+## Parameters for prefrulestrat :
 |param|required|note|
 |--------------------|--------|--------|
 |    indic   |    yes    | The indic Dataframe of a Prefrec extract   |
@@ -106,8 +106,8 @@ The folder sample contain a simple small dataset test. You can use it for the ex
 ```
 load("fruits")
 (a)Fruits_frequent = Prefrec(as.matrix(Transacfruits),0.01,,",","u")
-(b)Fruits_all_rules = Prefrules (Fruits_frequent$freqindic,Fruits$item,c("Conf2","Conf1","Cov"),c(0.1,0.1,0),c("Conf2","Kappa"),c("all_tgts"),c(1,1,1))
-(c)Fruits_cherry_rules = Prefrules (Fruits_frequent$freqindic,Fruits_frequent$item,c("Conf2","Power1"),c(0.1,0.1),c("all_indicators"),c("cherry,"),c(0,0,0))
+(b)Fruits_all_rules = prefrulestrat (Fruits_frequent$freqindic,Fruits$item,c("Conf2","Conf1","Cov"),c(0.1,0.1,0),c("Conf2","Kappa"),c("all_tgts"),c(1,1,1))
+(c)Fruits_cherry_rules = prefrulestrat (Fruits_frequent$freqindic,Fruits_frequent$item,c("Conf2","Power1"),c(0.1,0.1),c("all_indicators"),c("cherry,"),c(0,0,0))
 (d)cherry_antecedant = is_in_set(as.matrix(Fruits_all_rules$Antecedant),"apple,","a")
 (e)Binary_fruits = From_transaction_to_binary(as.matrix(Transacfruits),",")
 (f)Transac_fruits_x = From_binary_to_transaction(Binary_fruits,names(Binary_fruits),"-")

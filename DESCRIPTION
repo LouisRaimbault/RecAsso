@@ -11,7 +11,7 @@ Description: Provides functions allowing the user to recursively extract frequen
 License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.5)
 LinkingTo: Rcpp
-URL: https://github.com/LouisRaimbault/Rules_Rec
-BugReports: https://github.com/LouisRaimbault/Rules_Rec
+URL: https://github.com/LouisRaimbault/RecAsso
+BugReports: https://github.com/LouisRaimbault/RecAsso
 NeedsCompilation: yes
 RoxygenNote: 7.1.1
