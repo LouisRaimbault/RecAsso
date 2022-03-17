@@ -18,14 +18,14 @@ If you would like to better understand their use and methods of operation, pleas
 * (recursiv) Mining frequent itemSets with a relative Support
 * Get a R list composed of : The dataframe of the frequents itemset (named frequent_itemset), dataframe needed to start the prefrules function (named freqindic), the number of frequent itemset (nbfreq) and the list of frequent 1-itemset
 
-**Prefrules:**
+**prefrulestrat:**
 * (recursiv) Mining confident rules with a minConf value
 * 7 differents possibles kind of supplementary coefficient
 * Possibility of adding additional constraints to the extraction of the rules, based on the proposed coefficients
 * Possibility to select target items or itemset
 
 
-**Prefrules coefficient :** 
+**prefrulestrat coefficient :** 
 * Conf2 (usually know as minconf)
 * Conf1
 * Power2
@@ -35,7 +35,7 @@ If you would like to better understand their use and methods of operation, pleas
 * Kappa
 * Maxwell-Pilliner 
 
-**Prefrules global indicators :**
+**prefrulestrat global indicators :**
 * General-M
 * General-MW
 
@@ -47,7 +47,7 @@ If you would like to better understand their use and methods of operation, pleas
 ## Import package from GitHub and function parameters
 ```
 library(devtools)
-install_github("LouisRaimbault/RecAssoRul")
+install_github("LouisRaimbault/RecAsso")
 
 Prefrec (<data as transaction format>, <relative minsup>, <delimitator of item in a transaction>, <order of the frequent 1-item before extraction>)
 Prefrules (<freqindic from the prefrec extraction>, <items from the prefrec extraction>, <list of coefficients used to validate the rules>, <values of the coefficient used to validate the rules>,<wished coefficient exported as dataframe>, <potentiel target item or itemset>, <choice for supplementary indicators exported> )
