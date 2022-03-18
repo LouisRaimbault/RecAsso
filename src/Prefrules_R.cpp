@@ -637,7 +637,7 @@ Rcpp::DataFrame prefrulestrat (Rcpp::List indic ,std::vector<std::string> & name
   if (!ok_sup && ok_global_indic )  {Mat_coeff = std::vector<std::vector<double>> (nb_coeff_extract+2, std::vector<double> (n_rules));}
   if (!ok_sup && !ok_global_indic )  {Mat_coeff = std::vector<std::vector<double>> (nb_coeff_extract, std::vector<double> (n_rules));}
   
-  fill_rules(tab_choice_extract,nb_coeff_extract,ruleliste, map_sup,Mat_coeff,Mat_size,Mat_names,ok_size,ok_sup);
+  fill_rules(tab_choice_extract,nb_coeff_extract,ruleliste, map_sup,Mat_coeff,Mat_size,Mat_names,ok_sup,ok_size);
   int nb_frequent_target = 0;
   for (std::unordered_map<std::string,double>::iterator it = map_sup.begin();it != map_sup.end();it++)
   { std::string sttest = it->first;
